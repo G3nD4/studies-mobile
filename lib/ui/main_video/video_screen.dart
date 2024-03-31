@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -6,7 +7,14 @@ class VideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('svnjskd'))
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: context.gradient.containerBackgroundGradient,
+          ),
+          child: const Text('svnjskd'),
+        ),
+      ),
     );
   }
 }

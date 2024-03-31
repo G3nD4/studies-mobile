@@ -3,10 +3,12 @@ import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
 import 'package:coursor_tiktok/ui/profile/profile_screen.dart';
 import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
+import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -17,12 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        fontFamily: 'Comfortaa',
-        useMaterial3: true,
-      ),
+      theme: createLightTheme(),
       home: const CoursorTikTok(),
     );
   }
