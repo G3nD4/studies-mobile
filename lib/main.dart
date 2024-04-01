@@ -32,9 +32,10 @@ class CoursorTikTok extends StatefulWidget {
   State<CoursorTikTok> createState() => _CoursorTikTokState();
 }
 
-class _CoursorTikTokState extends State<CoursorTikTok> {
+class _CoursorTikTokState extends State<CoursorTikTok> with SingleTickerProviderStateMixin{
   late Widget currentScreen;
   late int _selectedIndex;
+  late final TabController controller;
   final screens = const [
     SearchScreen(),
     NotificationsScreen(),
@@ -52,48 +53,50 @@ class _CoursorTikTokState extends State<CoursorTikTok> {
   void initState() {
     super.initState();
     _selectedIndex = 2;
+    controller = TabController(length: screens.length, vsync: this);
     currentScreen = screens[_selectedIndex];
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentScreen,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
+      bottomNavigationBar: TabBar(
+        controller: controller,
         onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        tabs: const <Tab>[
+          Tab(
             icon: Image(image: Svg('assets/icons/chat_icon.svg')),
-            label: '',
           ),
-          BottomNavigationBarItem(
+          Tab(
             icon: Icon(
               Icons.business,
               color: Colors.black,
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
+          Tab(
             icon: Icon(
               Icons.business,
               color: Colors.black,
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
+          Tab(
             icon: Icon(
               Icons.business,
               color: Colors.black,
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
+          Tab(
             icon: Icon(
               Icons.business,
               color: Colors.black,
             ),
-            label: '',
           ),
         ],
       ),
