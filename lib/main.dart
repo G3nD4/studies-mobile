@@ -32,7 +32,8 @@ class CoursorTikTok extends StatefulWidget {
   State<CoursorTikTok> createState() => _CoursorTikTokState();
 }
 
-class _CoursorTikTokState extends State<CoursorTikTok> with SingleTickerProviderStateMixin{
+class _CoursorTikTokState extends State<CoursorTikTok>
+    with SingleTickerProviderStateMixin {
   late Widget currentScreen;
   late int _selectedIndex;
   late final TabController controller;
@@ -53,7 +54,11 @@ class _CoursorTikTokState extends State<CoursorTikTok> with SingleTickerProvider
   void initState() {
     super.initState();
     _selectedIndex = 2;
-    controller = TabController(length: screens.length, vsync: this);
+    controller = TabController(
+      length: screens.length,
+      vsync: this,
+      initialIndex: _selectedIndex,
+    );
     currentScreen = screens[_selectedIndex];
   }
 
