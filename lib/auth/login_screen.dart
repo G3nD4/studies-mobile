@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
         boxShadow: <BoxShadow>[
           AppShadows.containerInnerLightShadow,
         ],
-        color: AppColors.white.withOpacity(0.3),
+        color: AppColors.white.withOpacity(0.4),
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: Column(
