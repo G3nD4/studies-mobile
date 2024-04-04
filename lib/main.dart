@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/auth/auth_screen.dart';
 import 'package:coursor_tiktok/ui/main_video/video_screen.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
 import 'package:coursor_tiktok/ui/profile/profile_screen.dart';
@@ -70,7 +71,11 @@ class _CoursorTikTokState extends State<CoursorTikTok>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AuthScreen();
+    
+    
+    
+    Scaffold(
       body: currentScreen,
       bottomNavigationBar: TabBar(
         controller: controller,

@@ -43,8 +43,18 @@ abstract class AppGradients {
       AppColors.purple,
       AppColors.pink,
     ],
+    stops: [0.24, 1],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
+  );
+}
+
+abstract class AppShadows {
+  static const containerInnerLightShadow = BoxShadow(
+    color: Color.fromARGB(200, 142, 44, 199),
+    spreadRadius: -10,
+    blurRadius: 25,
+    offset: Offset(0, 0),
   );
 }
 
