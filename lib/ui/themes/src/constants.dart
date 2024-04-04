@@ -81,3 +81,42 @@ const paddingHorizontalTiny = SizedBox(width: 4.0);
 const paddingHorizontalSmall = SizedBox(width: 8.0);
 const paddingHorizontalMedium = SizedBox(width: 16.0);
 const paddingHorizontalLarge = SizedBox(width: 32.0);
+
+// input decorations for text fields
+abstract class AppInputDecorations {
+  static defaultInputDecoration({
+    Color fillColor = AppColors.white,
+    String? hintText,
+    TextStyle? hintStyle,
+    Icon? prefixIcon,
+  }) =>
+      InputDecoration(
+        filled: true,
+        fillColor: fillColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: BorderSide.none,
+        ),
+        hintText: hintText ?? 'Поиск',
+        hintStyle: hintStyle,
+        prefixIcon: prefixIcon,
+      );
+}
+
+abstract class AppButtonDecorations {
+  static defaultButtonDecoration({
+    required Widget child,
+    required void Function() onPressed,
+    Color? color,
+  }) =>
+      OutlinedButton(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          backgroundColor: color ?? AppColors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+        ),
+        child: child,
+      );
+}
