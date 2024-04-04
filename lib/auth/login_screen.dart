@@ -50,10 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextFormField(
               controller: _loginController,
               decoration: AppInputDecorations.defaultInputDecoration(
-                  fillColor: AppColors.white.withOpacity(0.2),
-                  hintStyle:
-                      context.text.labelStyle.copyWith(color: AppColors.white),
-                  hintText: 'Номер телефона или e-mail'),
+                fillColor: AppColors.white.withOpacity(0.2),
+                hintStyle:
+                    context.text.labelStyle.copyWith(color: AppColors.white),
+                hintText: 'Номер телефона или e-mail',
+              ),
             ),
           ),
           paddingVerticalLarge,

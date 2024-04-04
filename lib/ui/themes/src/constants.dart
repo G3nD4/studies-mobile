@@ -51,7 +51,7 @@ abstract class AppGradients {
 
 abstract class AppShadows {
   static const containerInnerLightShadow = BoxShadow(
-    color: Color.fromARGB(88, 142, 44, 199),
+    color: Color.fromARGB(110, 142, 44, 199),
     spreadRadius: -10,
     blurRadius: 15,
     offset: Offset(0, 0),

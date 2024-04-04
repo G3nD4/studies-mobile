@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/auth/register_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class AuthScreen extends StatelessWidget {
       ),
       child: const Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: LoginScreen()),
+        body: Center(child: RegistrationScreen()),
       ),
     );
   }
