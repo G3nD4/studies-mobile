@@ -1,5 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coursor_tiktok/ui/common/circle_avatar.dart';
 import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../themes/theme.dart';
+import 'widgets/app_settings_widget.dart';
+import 'widgets/change_profile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -7,8 +15,21 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(title: 'Настройки'),
-      body: Center(),
+      appBar: const DefaultAppBar(title: 'Настройки'),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          paddingVerticalMedium,
+          ChangeProfileWidget(),
+          paddingVerticalMedium,
+          Text(
+            'Приложение',
+            style: context.text.appDescription,
+          ),
+          const AppSettingsWidget(),
+        ],
+      ),
     );
   }
 }

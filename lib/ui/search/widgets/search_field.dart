@@ -25,7 +25,7 @@ class _SearchFieldState extends State<SearchField> {
       controller: controller,
       decoration: InputDecoration(
         filled: true,
-        fillColor: context.color.micIcon,
+        fillColor: AppColors.veryLightGrey,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide.none,

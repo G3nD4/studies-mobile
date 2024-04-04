@@ -2,6 +2,7 @@ import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../common/course_bubble.dart';
 import '../common/default_appbar.dart';
 import 'cubit/search_courses_cubit.dart';
 import 'widgets/search_field.dart';
@@ -34,7 +35,22 @@ class SearchScreen extends StatelessWidget {
               'Популярные курсы',
               style: context.text.appDescription,
             ),
-            paddingVerticalLarge
+            paddingVerticalLarge,
+            Padding(
+              padding: paddingMedium.copyWith(top: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CourseBubble(title: 'Flutter', description: 'Course' * 5),
+                  paddingVerticalMedium,
+                  CourseBubble(title: 'Flutter', description: 'Course' * 15),
+                  paddingVerticalMedium,
+                  CourseBubble(title: 'Flutter', description: 'Course' * 5),
+                  paddingVerticalMedium,
+                  CourseBubble(title: 'Flutter', description: 'Course' * 5),
+                ],
+              ),
+            ),
           ],
         ),
       ),

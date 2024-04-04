@@ -18,16 +18,23 @@ const headlineSmall = TextStyle(
   color: AppColors.grey,
 );
 
+const headlineXSmall = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontSize: 12,
+  color: AppColors.grey,
+);
+
 abstract class AppColors {
   // from [Colors]
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
 
   static const grey = Color(0xFF545864);
-  static const lightGrey = Color(0xFFD9D9D9);
+  static const lightGrey = Color.fromARGB(255, 157, 157, 157);
   static const mostLightwhite = Color(0xFFB3B5BB);
   static const purple = Color(0xFF8E2CC7);
   static const pink = Color(0xFFD96CF8);
+  static const veryLightGrey = Color(0xFFD9D9D9);
 }
 
 abstract class AppGradients {
