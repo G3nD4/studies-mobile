@@ -1,4 +1,5 @@
 import 'package:coursor_tiktok/ui/common/circle_avatar.dart';
+import 'package:coursor_tiktok/ui/common/profile_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -37,29 +38,16 @@ class ProfileScreen extends StatelessWidget {
   _profileHeader(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const DefaultCircleAvatar(
+            DefaultCircleAvatar(
               radius: 40.0,
             ),
             paddingHorizontalMedium,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Adel Shagaliev',
-                  style: context.text.labelStyle,
-                ),
-                paddingVerticalSmall,
-                Text(
-                  '@G3nD4',
-                  style: context.text.labelStyle.copyWith(
-                    color: AppColors.lightGrey,
-                    fontSize: 13.0,
-                  ),
-                ),
-              ],
+            ProfileHeader(
+              title: 'Adel Shagaliev',
+              subtitle: '@G3nD4',
             ),
           ],
         ),

@@ -1,9 +1,11 @@
 import 'package:coursor_tiktok/ui/common/circle_avatar.dart';
+import 'package:coursor_tiktok/ui/common/profile_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/course_bubble.dart';
 import '../../common/default_appbar.dart';
+import '../../common/default_divider.dart';
 
 class AdminProfileScreen extends StatelessWidget {
   const AdminProfileScreen({super.key});
@@ -20,68 +22,58 @@ class AdminProfileScreen extends StatelessWidget {
             child: _profileHeader(context),
           ),
           paddingVerticalMedium,
-          const Divider(
-            thickness: 2.0,
-            color: AppColors.veryLightGrey,
-          ),
+          const DefaultDivider(),
           paddingVerticalMedium,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: _profileBody(context),
           ),
+          const DefaultDivider(),
+          paddingVerticalMedium,
+          _createCourseButton(context),
         ],
       ),
+    );
+  }
+
+  _createCourseButton(BuildContext context) {
+    return AppButtonDecorations.defaultButtonDecoration(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.add,
+            color: context.color.unselectedLabel,
+            size: MediaQuery.of(context).size.height * 0.02,
+          ),
+          paddingHorizontalSmall,
+          Text(
+            'Создать курс',
+            style: context.text.labelStyle,
+          ),
+        ],
+      ),
+      onPressed: () {},
     );
   }
 
   _profileHeader(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const DefaultCircleAvatar(
-              radius: 40.0,
-            ),
-            paddingHorizontalMedium,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Adel Shagaliev',
-                  style: context.text.labelStyle,
-                ),
-                paddingVerticalSmall,
-                Text(
-                  '@G3nD4',
-                  style: context.text.labelStyle.copyWith(
-                    color: AppColors.lightGrey,
-                    fontSize: 13.0,
-                  ),
-                ),
-              ],
-            ),
-          ],
+        const ProfileHeader(
+          title: 'Adel Shagaliev',
+          subtitle: '@G3nD4',
         ),
         paddingVerticalMedium,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Курсов пройдено: 15',
-              style: context.text.labelStyle.copyWith(
-                color: AppColors.grey,
-                fontSize: 13.0,
-              ),
+        Center(
+          child: Text(
+            'Курсов создано: 2',
+            style: context.text.labelStyle.copyWith(
+              color: AppColors.grey,
+              fontSize: 13.0,
             ),
-            Text(
-              'Курсы в процессе: 10',
-              style: context.text.labelStyle.copyWith(
-                color: AppColors.grey,
-                fontSize: 13.0,
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -91,7 +83,7 @@ class AdminProfileScreen extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Доступные курсы',
+          'Мои курсы',
           style: context.text.appDescription,
         ),
         paddingVerticalMedium,
@@ -102,9 +94,6 @@ class AdminProfileScreen extends StatelessWidget {
             paddingVerticalMedium,
             CourseBubble(title: 'Flutter', description: 'Course' * 15),
             paddingVerticalMedium,
-            CourseBubble(title: 'Flutter', description: 'Course' * 5),
-            paddingVerticalMedium,
-            CourseBubble(title: 'Flutter', description: 'Course' * 5),
           ],
         ),
       ],
