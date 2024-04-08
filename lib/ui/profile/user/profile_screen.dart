@@ -2,8 +2,8 @@ import 'package:coursor_tiktok/ui/common/circle_avatar.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../common/course_bubble.dart';
-import '../common/default_appbar.dart';
+import '../../common/course_bubble.dart';
+import '../../common/default_appbar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

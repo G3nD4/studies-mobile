@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../ui/themes/theme.dart';
+import 'cubit/auth_cubit.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -96,6 +98,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             color: AppColors.white.withOpacity(0.2),
             onPressed: () {
               log('Button "Войти" pressed.', name: 'LoginScreen');
+              BlocProvider.of<AuthCubit>(context).enterLoginScreen();
             },
             child: Text(
               '   Создать аккаунт   ',

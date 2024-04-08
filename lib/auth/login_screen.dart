@@ -1,9 +1,12 @@
 import 'dart:developer';
 
+import 'package:coursor_tiktok/main.dart';
+import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../ui/themes/theme.dart';
+import 'cubit/auth_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -85,6 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
           AppButtonDecorations.defaultButtonDecoration(
             color: AppColors.white.withOpacity(0.2),
             onPressed: () {
+              // вынести в главный экран, определить метод для входа
+              BlocProvider.of<AuthCubit>(context).login();
               log('Button "Войти" pressed.', name: 'LoginScreen');
             },
             child: Text(
@@ -103,6 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
           TextButton(
             onPressed: () {
               log('Button "Зарегистрироваться" pressed.', name: 'LoginScreen');
+              BlocProvider.of<AuthCubit>(context).enterRegisterScreen();
             },
             child: Text(
               'Зарегистрируйтесь!',

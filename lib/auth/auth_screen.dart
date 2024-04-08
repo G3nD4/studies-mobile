@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/auth/cubit/auth_cubit.dart';
 import 'package:coursor_tiktok/auth/register_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,22 @@ class AuthScreen extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: context.gradient.containerBackgroundGradient,
       ),
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: RegistrationScreen()),
+        body: Center(
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              if (state is LoginState) {
+                return const LoginScreen();
+              } else if (state is RegisterState) {
+                return const RegistrationScreen();
+              } else {
+                throw Exception(
+                    'Such state ${state.runtimeType} does not exist!');
+              }
+            },
+          ),
+        ),
       ),
     );
   }

@@ -1,12 +1,19 @@
 import 'package:coursor_tiktok/auth/auth_screen.dart';
+import 'package:coursor_tiktok/auth/authorization_controller.dart';
+import 'package:coursor_tiktok/auth/login_screen.dart';
+import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:coursor_tiktok/ui/main_video/video_screen.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
-import 'package:coursor_tiktok/ui/profile/profile_screen.dart';
+import 'package:coursor_tiktok/ui/profile/admin/admin_profile.dart';
+import 'package:coursor_tiktok/ui/profile/user/profile_screen.dart';
 import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+
+import 'auth/cubit/auth_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +28,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: createLightTheme(),
-      home: const CoursorTikTok(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      home: const AuthorizationController(),
     );
   }
 }
@@ -42,7 +50,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
     SearchScreen(),
     NotificationsScreen(),
     VideoScreen(),
-    ProfileScreen(),
+    AdminProfileScreen(),
     SettingsScreen(),
   ];
   void _onItemTapped(int index) {
@@ -71,11 +79,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
 
   @override
   Widget build(BuildContext context) {
-    return AuthScreen();
-    
-    
-    
-    Scaffold(
+    return Scaffold(
       body: currentScreen,
       bottomNavigationBar: TabBar(
         controller: controller,
