@@ -1,4 +1,3 @@
-import 'package:coursor_tiktok/ui/common/circle_avatar.dart';
 import 'package:coursor_tiktok/ui/common/profile_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,7 @@ class AdminProfileScreen extends StatelessWidget {
   }
 
   _createCourseButton(BuildContext context) {
-    return AppButtonDecorations.defaultButtonDecoration(
+    return AppButtons.defaultOutlineButton(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,

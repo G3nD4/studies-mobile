@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^8.1.5
   bloc: ^8.1.4
   meta: ^1.11.0
+  easy_debounce: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -103,8 +103,8 @@ abstract class AppInputDecorations {
       );
 }
 
-abstract class AppButtonDecorations {
-  static defaultButtonDecoration({
+abstract class AppButtons {
+  static defaultOutlineButton({
     required Widget child,
     required void Function() onPressed,
     Color? color,
@@ -119,4 +119,19 @@ abstract class AppButtonDecorations {
         ),
         child: child,
       );
+
+  static defaultButton({
+    required Widget child,
+    required void Function() onPressed,
+    Color? color,
+  }) => MaterialButton(
+    elevation: 0.0,
+    padding: EdgeInsets.zero,
+    onPressed: onPressed,
+    color: color ?? AppColors.veryLightGrey,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30.0),
+    ),
+    child: child,
+  );
 }

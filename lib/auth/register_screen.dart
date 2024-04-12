@@ -94,7 +94,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ],
           ),
           const SizedBox(height: 64.0),
-          AppButtonDecorations.defaultButtonDecoration(
+          AppButtons.defaultOutlineButton(
             color: AppColors.white.withOpacity(0.2),
             onPressed: () {
               log('Button "Войти" pressed.', name: 'LoginScreen');

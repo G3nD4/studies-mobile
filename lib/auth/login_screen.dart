@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:coursor_tiktok/main.dart';
-import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -85,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           paddingVerticalMedium,
-          AppButtonDecorations.defaultButtonDecoration(
+          AppButtons.defaultOutlineButton(
             color: AppColors.white.withOpacity(0.2),
             onPressed: () {
               // вынести в главный экран, определить метод для входа

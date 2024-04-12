@@ -1,19 +1,15 @@
-import 'package:coursor_tiktok/auth/auth_screen.dart';
 import 'package:coursor_tiktok/auth/authorization_controller.dart';
-import 'package:coursor_tiktok/auth/login_screen.dart';
 import 'package:coursor_tiktok/routing/route_generator.dart';
-import 'package:coursor_tiktok/ui/main_video/video_screen.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
 import 'package:coursor_tiktok/ui/profile/admin/admin_profile.dart';
-import 'package:coursor_tiktok/ui/profile/user/profile_screen.dart';
 import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-import 'auth/cubit/auth_cubit.dart';
+import 'domain/models/course_model.dart';
+import 'ui/course/course_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,12 +42,19 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   late Widget currentScreen;
   late int _selectedIndex;
   late final TabController controller;
-  final screens = const [
-    SearchScreen(),
-    NotificationsScreen(),
-    VideoScreen(),
-    AdminProfileScreen(),
-    SettingsScreen(),
+  final screens = [
+    const SearchScreen(),
+    const NotificationsScreen(),
+    CourseScreen(
+      course: Course(
+        id: 1,
+        title: 'G3nD4 course',
+        description:
+            'Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой',
+      ),
+    ),
+    const AdminProfileScreen(),
+    const SettingsScreen(),
   ];
   void _onItemTapped(int index) {
     _selectedIndex = index;
