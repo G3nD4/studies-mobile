@@ -11,9 +11,9 @@ class CourseVideosList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CourseVideosCubit>(
-      create: (context) => CourseVideosCubit()..nextPage(),
-      child: BlocBuilder<CourseVideosCubit, CourseVideosState>(
+    return BlocProvider<MediaLoaderCubit>(
+      create: (context) => MediaLoaderCubit()..nextPage(),
+      child: BlocBuilder<MediaLoaderCubit, CourseVideosState>(
         builder: (context, state) {
           if (state is CourseVideosLoading) {
             return const Center(
@@ -69,7 +69,7 @@ class _CourseVideosListViewState extends State<CourseVideosListView> {
         'corse-videos-debounce',
         const Duration(milliseconds: 1500),
         () {
-          context.read<CourseVideosCubit>().nextPage();
+          context.read<MediaLoaderCubit>().nextPage();
         },
       );
     }

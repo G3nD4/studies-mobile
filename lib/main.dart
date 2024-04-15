@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 import 'domain/models/course_model.dart';
+import 'ui/course/course_content/course_content_screen.dart';
 import 'ui/course/course_screen.dart';
+import 'ui/course/redact_course/redact_course_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +47,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   final screens = [
     const SearchScreen(),
     const NotificationsScreen(),
+    // const CourseContentScreen(),
     CourseScreen(
       course: Course(
         id: 1,

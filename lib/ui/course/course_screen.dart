@@ -5,15 +5,51 @@ import 'package:coursor_tiktok/ui/common/profile_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/course_modules_list.dart';
 import 'widgets/course_videos_list.dart';
 
-class CourseScreen extends StatelessWidget {
+class CourseScreen extends StatefulWidget {
   final Course course;
 
   const CourseScreen({
     super.key,
     required this.course,
   });
+
+  @override
+  State<CourseScreen> createState() => _CourseScreenState();
+}
+
+class _CourseScreenState extends State<CourseScreen>
+    with TickerProviderStateMixin {
+  late final TabController _pageViewController;
+  int selectedTabIndex = 0;
+
+  final List<Widget> _tabs = const [
+    Text('Модули'),
+    Text('Видео'),
+  ];
+
+  final List<Widget> _screens = [
+    const CourseModulesList(),
+    const CourseVideosList(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageViewController = TabController(
+      length: 2,
+      vsync: this,
+      animationDuration: const Duration(milliseconds: 400)
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageViewController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +69,29 @@ class CourseScreen extends StatelessWidget {
           aboutCourse(context),
           const DefaultDivider(),
           paddingVerticalSmall,
-          const CourseVideosList(),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TabBar(
+                  isScrollable: false,
+                  tabAlignment: TabAlignment.fill,
+                  dividerHeight: 0.0,
+                  tabs: _tabs,
+                  controller: _pageViewController,
+                  onTap: (value) {
+                    setState(() {
+                      selectedTabIndex = value;
+                    });
+                  },
+                ),
+                paddingVerticalMedium,
+                _screens[selectedTabIndex],
+              ],
+            ),
+          ),
+          // const CourseVideosList(),
         ],
       ),
     );
@@ -89,7 +147,7 @@ class CourseScreen extends StatelessWidget {
           Text('О курсе', style: context.text.labelStyle),
           paddingVerticalSmall,
           Text(
-            course.description,
+            widget.course.description,
             style: context.text.labelStyle,
           ),
           paddingVerticalMedium,
