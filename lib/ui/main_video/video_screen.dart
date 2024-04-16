@@ -17,7 +17,7 @@ class VideoScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              // Сделать разноцветные прогресс индикаторы
+              // TODO: Сделать разноцветные прогресс индикаторы
               child: PageView(
                 scrollDirection: Axis.vertical,
                 children: const [
