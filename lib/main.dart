@@ -12,6 +12,7 @@ import 'domain/models/course_model.dart';
 import 'ui/course/course_content/course_content_screen.dart';
 import 'ui/course/course_screen.dart';
 import 'ui/course/redact_course/redact_course_screen.dart';
+import 'ui/main_video/video_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,14 +49,15 @@ class _CoursorTikTokState extends State<CoursorTikTok>
     const SearchScreen(),
     const NotificationsScreen(),
     // const CourseContentScreen(),
-    CourseScreen(
-      course: Course(
-        id: 1,
-        title: 'G3nD4 course',
-        description:
-            'Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой',
-      ),
-    ),
+    const VideoScreen(),
+    // CourseScreen(
+    //   course: Course(
+    //     id: 1,
+    //     title: 'G3nD4 course',
+    //     description:
+    //         'Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой',
+    //   ),
+    // ),
     const AdminProfileScreen(),
     const SettingsScreen(),
   ];
@@ -87,35 +89,45 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentScreen,
+      backgroundColor: _selectedIndex == 2 ? AppColors.black : null,
       bottomNavigationBar: TabBar(
+        indicatorColor: AppColors.purple,
+        indicatorPadding: const EdgeInsets.only(bottom: 4.0),
         controller: controller,
         onTap: _onItemTapped,
         tabs: const <Tab>[
           Tab(
-            icon: Image(image: Svg('assets/icons/chat_icon.svg')),
-          ),
-          Tab(
-            icon: Icon(
-              Icons.business,
-              color: Colors.black,
+            icon: Image(
+              height: 100,
+              image: Svg('assets/icons/chat_icon.svg'),
             ),
           ),
           Tab(
             icon: Icon(
-              Icons.business,
-              color: Colors.black,
+              Icons.notifications_none,
+              color: AppColors.grey,
+              size: 36.0,
             ),
           ),
           Tab(
             icon: Icon(
-              Icons.business,
-              color: Colors.black,
+              Icons.play_circle,
+              color: AppColors.purple,
+              size: 36.0,
             ),
           ),
           Tab(
             icon: Icon(
-              Icons.business,
-              color: Colors.black,
+              Icons.person_2_outlined,
+              color: AppColors.grey,
+              size: 36.0,
+            ),
+          ),
+          Tab(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: AppColors.grey,
+              size: 36.0,
             ),
           ),
         ],
