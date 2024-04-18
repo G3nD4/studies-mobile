@@ -81,7 +81,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
         indicatorColor: AppColors.purple,
         indicatorPadding: const EdgeInsets.only(bottom: 4.0),
         controller: _tabController,
-        onTap: _onPageChanged,
+        onTap: onTabTapped,
         tabs: const <Tab>[
           Tab(
             icon: Icon(
@@ -121,6 +121,14 @@ class _CoursorTikTokState extends State<CoursorTikTok>
         ],
       ),
     );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _tabController.animateTo(index);
+      _pageController.jumpToPage(index);
+    });
   }
 
   void _onPageChanged(int index) {

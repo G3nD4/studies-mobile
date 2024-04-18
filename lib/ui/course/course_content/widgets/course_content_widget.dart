@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 class CourseContentWidget extends StatelessWidget {
@@ -5,8 +6,11 @@ class CourseContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: context.color.appContainerBackground,
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: ListView(
