@@ -1,6 +1,8 @@
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../routing/route_generator.dart';
+
 class PreviewVideoSmallWidget extends StatelessWidget {
   final String text;
 
@@ -10,7 +12,7 @@ class PreviewVideoSmallWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        throw UnimplementedError('Implement transition to main video screen');
+        Navigator.of(context).pushNamed(videoRoute);
       },
       child: Container(
         width: MediaQuery.of(context).size.width * (1 / 4.3),

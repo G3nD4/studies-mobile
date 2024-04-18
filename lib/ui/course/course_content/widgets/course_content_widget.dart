@@ -5,9 +5,20 @@ class CourseContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Content' * 50,
-      maxLines: 50,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Text(
+              'Content' * 200,
+              maxLines: 50,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

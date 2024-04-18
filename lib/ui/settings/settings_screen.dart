@@ -19,10 +19,10 @@ class SettingsScreen extends StatelessWidget {
           paddingVerticalMedium,
           ChangeProfileWidget(),
           paddingVerticalMedium,
-          Text(
-            'Приложение',
-            style: context.text.appDescription,
-          ),
+          // Text(
+          //   'Приложение',
+          //   style: context.text.appDescription,
+          // ),
           const AppSettingsWidget(),
         ],
       ),

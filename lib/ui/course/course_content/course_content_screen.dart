@@ -2,7 +2,6 @@ import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:coursor_tiktok/ui/common/default_divider.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import 'widgets/course_content_widget.dart';
 
@@ -51,33 +50,21 @@ class _CourseContentScreenState extends State<CourseContentScreen>
           ),
           const DefaultDivider(),
           paddingVerticalMedium,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                SizedBox(
-                  height: MediaQuery.of(context).size.width,
-                  child: PageView(
-                    controller: _pageViewController,
-                    onPageChanged: _handlePageViewChanged,
-                    children: const <Widget>[
-                      CourseContentWidget(),
-                      CourseContentWidget(),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 32.0),
-                  child: PageIndicator(
-                    tabController: _tabController,
-                    currentPageIndex: _currentPageIndex,
-                    onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-                    isOnDesktopAndWeb: _isOnDesktopAndWeb,
-                  ),
-                ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.65,
+            child: PageView(
+              controller: _pageViewController,
+              onPageChanged: _handlePageViewChanged,
+              children: const <Widget>[
+                CourseContentWidget(),
+                CourseContentWidget(),
               ],
             ),
+          ),
+          PageIndicator(
+            tabController: _tabController,
+            currentPageIndex: _currentPageIndex,
+            onUpdateCurrentPageIndex: _updateCurrentPageIndex,
           ),
         ],
       ),
@@ -85,9 +72,6 @@ class _CourseContentScreenState extends State<CourseContentScreen>
   }
 
   void _handlePageViewChanged(int currentPageIndex) {
-    if (!_isOnDesktopAndWeb) {
-      return;
-    }
     _tabController.index = currentPageIndex;
     setState(() {
       _currentPageIndex = currentPageIndex;
@@ -101,22 +85,6 @@ class _CourseContentScreenState extends State<CourseContentScreen>
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
     );
-  }
-
-  bool get _isOnDesktopAndWeb {
-    if (kIsWeb) {
-      return true;
-    }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.macOS:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        return true;
-      case TargetPlatform.android:
-      case TargetPlatform.iOS:
-      case TargetPlatform.fuchsia:
-        return false;
-    }
   }
 
   _buildCourseHeader(BuildContext context) {
@@ -160,27 +128,25 @@ class _CourseContentScreenState extends State<CourseContentScreen>
   }
 }
 
-class PageIndicator extends StatelessWidget {
+class PageIndicator extends StatefulWidget {
   const PageIndicator({
     super.key,
     required this.tabController,
     required this.currentPageIndex,
     required this.onUpdateCurrentPageIndex,
-    required this.isOnDesktopAndWeb,
   });
 
   final int currentPageIndex;
   final TabController tabController;
   final void Function(int) onUpdateCurrentPageIndex;
-  final bool isOnDesktopAndWeb;
 
   @override
-  Widget build(BuildContext context) {
-    if (!isOnDesktopAndWeb) {
-      return const SizedBox.shrink();
-    }
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  State<PageIndicator> createState() => _PageIndicatorState();
+}
 
+class _PageIndicatorState extends State<PageIndicator> {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -190,32 +156,38 @@ class PageIndicator extends StatelessWidget {
             splashRadius: 16.0,
             padding: EdgeInsets.zero,
             onPressed: () {
-              if (currentPageIndex == 0) {
+              if (widget.currentPageIndex == 0) {
                 return;
               }
-              onUpdateCurrentPageIndex(currentPageIndex - 1);
+              widget.onUpdateCurrentPageIndex(widget.currentPageIndex - 1);
+              setState(() {});
             },
             icon: const Icon(
               Icons.arrow_left_rounded,
+              color: AppColors.purple,
               size: 32.0,
             ),
           ),
-          TabPageSelector(
-            controller: tabController,
-            color: colorScheme.background,
-            selectedColor: colorScheme.primary,
+          Text(
+            '${widget.tabController.index + 1}/${widget.tabController.length}',
+            style: context.text.labelStyle.copyWith(
+              fontSize: 15.0,
+              color: AppColors.lightGrey,
+            ),
           ),
           IconButton(
             splashRadius: 16.0,
             padding: EdgeInsets.zero,
             onPressed: () {
-              if (currentPageIndex == 1) {
+              if (widget.currentPageIndex == 1) {
                 return;
               }
-              onUpdateCurrentPageIndex(currentPageIndex + 1);
+              widget.onUpdateCurrentPageIndex(widget.currentPageIndex + 1);
+              setState(() {});
             },
             icon: const Icon(
               Icons.arrow_right_rounded,
+              color: AppColors.purple,
               size: 32.0,
             ),
           ),
