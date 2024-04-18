@@ -1,4 +1,5 @@
 import 'package:coursor_tiktok/domain/models/course_model.dart';
+import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:coursor_tiktok/ui/common/default_divider.dart';
 import 'package:coursor_tiktok/ui/common/profile_header.dart';
@@ -39,10 +40,9 @@ class _CourseScreenState extends State<CourseScreen>
   void initState() {
     super.initState();
     _pageViewController = TabController(
-      length: 2,
-      vsync: this,
-      animationDuration: const Duration(milliseconds: 400)
-    );
+        length: 2,
+        vsync: this,
+        animationDuration: const Duration(milliseconds: 400));
   }
 
   @override
@@ -123,7 +123,9 @@ class _CourseScreenState extends State<CourseScreen>
               ),
             ),
             AppButtons.defaultButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(courseManagementRoute);
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(

@@ -48,16 +48,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   final screens = [
     const SearchScreen(),
     const NotificationsScreen(),
-    // const CourseContentScreen(),
     const VideoScreen(),
-    // CourseScreen(
-    //   course: Course(
-    //     id: 1,
-    //     title: 'G3nD4 course',
-    //     description:
-    //         'Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой Я крутой',
-    //   ),
-    // ),
     const AdminProfileScreen(),
     const SettingsScreen(),
   ];
