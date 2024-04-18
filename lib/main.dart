@@ -6,12 +6,6 @@ import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-
-import 'domain/models/course_model.dart';
-import 'ui/course/course_content/course_content_screen.dart';
-import 'ui/course/course_screen.dart';
-import 'ui/course/redact_course/redact_course_screen.dart';
 import 'ui/main_video/video_screen.dart';
 
 void main() {
@@ -42,9 +36,10 @@ class CoursorTikTok extends StatefulWidget {
 
 class _CoursorTikTokState extends State<CoursorTikTok>
     with SingleTickerProviderStateMixin {
-  late Widget currentScreen;
   late int _selectedIndex;
-  late final TabController controller;
+  late final TabController _tabController;
+  late final PageController _pageController;
+
   final screens = [
     const SearchScreen(),
     const NotificationsScreen(),
@@ -52,41 +47,41 @@ class _CoursorTikTokState extends State<CoursorTikTok>
     const AdminProfileScreen(),
     const SettingsScreen(),
   ];
-  void _onItemTapped(int index) {
-    _selectedIndex = index;
-    currentScreen = screens[_selectedIndex];
-    setState(() {});
-  }
 
   @override
   void initState() {
     super.initState();
     _selectedIndex = 2;
-    controller = TabController(
+    _tabController = TabController(
       length: screens.length,
       vsync: this,
       initialIndex: _selectedIndex,
     );
-    currentScreen = screens[_selectedIndex];
+    _pageController = PageController(initialPage: 2);
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    _tabController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentScreen,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        children: screens,
+      ),
       backgroundColor: _selectedIndex == 2 ? AppColors.black : null,
       bottomNavigationBar: TabBar(
         dividerColor: AppColors.black,
         indicatorColor: AppColors.purple,
         indicatorPadding: const EdgeInsets.only(bottom: 4.0),
-        controller: controller,
-        onTap: _onItemTapped,
+        controller: _tabController,
+        onTap: _onPageChanged,
         tabs: const <Tab>[
           Tab(
             icon: Icon(
@@ -126,5 +121,13 @@ class _CoursorTikTokState extends State<CoursorTikTok>
         ],
       ),
     );
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _tabController.animateTo(index);
+      _pageController.jumpToPage(index);
+    });
   }
 }
