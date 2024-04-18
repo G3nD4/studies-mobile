@@ -127,7 +127,6 @@ class _CoursorTikTokState extends State<CoursorTikTok>
     setState(() {
       _selectedIndex = index;
       _tabController.animateTo(index);
-      _pageController.jumpToPage(index);
     });
   }
 }
