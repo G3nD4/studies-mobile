@@ -82,43 +82,45 @@ class _CoursorTikTokState extends State<CoursorTikTok>
       body: currentScreen,
       backgroundColor: _selectedIndex == 2 ? AppColors.black : null,
       bottomNavigationBar: TabBar(
+        dividerColor: AppColors.black,
         indicatorColor: AppColors.purple,
         indicatorPadding: const EdgeInsets.only(bottom: 4.0),
         controller: controller,
         onTap: _onItemTapped,
         tabs: const <Tab>[
           Tab(
-            icon: Image(
-              height: 100,
-              image: Svg('assets/icons/chat_icon.svg'),
+            icon: Icon(
+              Icons.search_sharp,
+              color: AppColors.grey,
+              size: 32.0,
             ),
           ),
           Tab(
             icon: Icon(
               Icons.notifications_none,
               color: AppColors.grey,
-              size: 36.0,
+              size: 32.0,
             ),
           ),
           Tab(
             icon: Icon(
               Icons.play_circle,
               color: AppColors.purple,
-              size: 36.0,
+              size: 40.0,
             ),
           ),
           Tab(
             icon: Icon(
               Icons.person_2_outlined,
               color: AppColors.grey,
-              size: 36.0,
+              size: 32.0,
             ),
           ),
           Tab(
             icon: Icon(
               Icons.settings_outlined,
               color: AppColors.grey,
-              size: 36.0,
+              size: 32.0,
             ),
           ),
         ],

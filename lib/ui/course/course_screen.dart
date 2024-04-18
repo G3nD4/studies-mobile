@@ -109,28 +109,31 @@ class _CourseScreenState extends State<CourseScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AppButtons.defaultButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(editCourseRoute);
+              },
               color: context.color.selectedLabel,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
                   'Редактировать курс',
                   style: context.text.labelStyle.copyWith(
-                    fontSize: 12.0,
+                    fontSize: 11.0,
                     color: AppColors.white,
                   ),
                 ),
               ),
             ),
+            paddingHorizontalMedium,
             AppButtons.defaultButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(courseManagementRoute);
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
                   'Управление курсом',
-                  style: context.text.labelStyle.copyWith(fontSize: 12.0),
+                  style: context.text.labelStyle.copyWith(fontSize: 11.0),
                 ),
               ),
             ),

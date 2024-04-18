@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:coursor_tiktok/ui/common/profile_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,9 @@ class AdminProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed(editCourseRoute);
+      },
     );
   }
 
