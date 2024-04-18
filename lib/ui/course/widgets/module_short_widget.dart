@@ -3,9 +3,7 @@ import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 class ModuleShortWidget extends StatefulWidget {
-  final Color color;
-
-  const ModuleShortWidget({super.key, required this.color});
+  const ModuleShortWidget({super.key});
 
   @override
   State<ModuleShortWidget> createState() => _ModuleShortWidgetState();
@@ -20,8 +18,9 @@ class _ModuleShortWidgetState extends State<ModuleShortWidget> {
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.1,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: widget.color,
+          color: AppColors.pink,
           borderRadius: BorderRadius.circular(25.0),
           gradient: AppGradients.containerBackgroundGradient,
         ),

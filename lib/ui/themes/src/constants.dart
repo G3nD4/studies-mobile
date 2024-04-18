@@ -35,6 +35,9 @@ abstract class AppColors {
   static const purple = Color(0xFF8E2CC7);
   static const pink = Color(0xFFD96CF8);
   static const veryLightGrey = Color(0xFFD9D9D9);
+
+  // 0xFFDA6CF8 with +- 0.25 opacity
+  static const studyCardColor = Color.fromARGB(79, 218, 108, 248);
 }
 
 abstract class AppGradients {
