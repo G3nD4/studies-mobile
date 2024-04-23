@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:flutter/material.dart';
 import '../../themes/theme.dart';
 
@@ -8,9 +9,7 @@ class TestShortWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        throw UnimplementedError(
-            'Transition to TestShortWidget not implemented');
-        // Navigator.of(context).pushNamed(courseContentRoute);
+        Navigator.of(context).pushNamed(courseTestRoute);
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.1,

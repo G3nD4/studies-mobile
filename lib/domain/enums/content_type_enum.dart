@@ -1,0 +1,4 @@
+enum CourseContentType {
+  test,
+  education,
+}

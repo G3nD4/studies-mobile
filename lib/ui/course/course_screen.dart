@@ -156,34 +156,31 @@ class _CourseScreenState extends State<CourseScreen>
             style: context.text.labelStyle,
           ),
           paddingVerticalMedium,
+          Text(
+            'Зачислено 5230',
+            style: context.text.labelStyle.copyWith(
+              fontSize: 13.0,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          paddingVerticalSmall,
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const Icon(
+                Icons.flag,
+                color: AppColors.lightGrey,
+              ),
               Text(
-                'Зачислено 5230',
+                'Завершило 5230',
                 style: context.text.labelStyle.copyWith(
                   fontSize: 13.0,
                   color: AppColors.lightGrey,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.flag,
-                    color: AppColors.lightGrey,
-                  ),
-                  Text(
-                    'Завершило 5230',
-                    style: context.text.labelStyle.copyWith(
-                      fontSize: 13.0,
-                      color: AppColors.lightGrey,
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
+          paddingVerticalSmall,
           Row(
             children: [
               const Icon(

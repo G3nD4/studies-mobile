@@ -9,9 +9,9 @@ class CourseModulesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: const Column(
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
         children: [
           ModuleShortWidget(),
           paddingVerticalMedium,

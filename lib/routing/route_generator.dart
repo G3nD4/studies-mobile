@@ -5,6 +5,7 @@ import '../domain/models/course_model.dart';
 import '../main.dart';
 import '../ui/course/course_content/course_content_screen.dart';
 import '../ui/course/course_screen.dart';
+import '../ui/course/course_test/course_test_screen.dart';
 import '../ui/course/redact_course/redact_course_screen.dart';
 import '../ui/course/redact_course/widgets/course_management_screen.dart';
 import '../ui/main_video/video_screen.dart';
@@ -20,6 +21,7 @@ const courseScreenRoute = '/course';
 const courseManagementRoute = '/course/management';
 const courseContentRoute = '/course/content';
 const editCourseRoute = '/course/edit';
+const courseTestRoute = '/course/test';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -61,6 +63,11 @@ class RouteGenerator {
               description: 'Описание курса 1',
             ),
           ),
+        );
+
+      case courseTestRoute:
+        return MaterialPageRoute(
+          builder: (_) => const CourseTestScreen(),
         );
       default:
         {

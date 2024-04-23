@@ -1,8 +1,10 @@
+import 'package:coursor_tiktok/domain/enums/content_type_enum.dart';
 import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:coursor_tiktok/ui/common/default_divider.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/course_content_header.dart';
 import 'widgets/course_content_widget.dart';
 
 class CourseContentScreen extends StatefulWidget {
@@ -41,12 +43,15 @@ class _CourseContentScreenState extends State<CourseContentScreen>
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 20.0,
               vertical: 16.0,
             ),
-            child: _buildCourseHeader(context),
+            child: CourseContentHeader(
+              title: 'Модуль 1. Основы подбора цветов',
+              contentType: CourseContentType.education,
+            ),
           ),
           const DefaultDivider(),
           paddingVerticalMedium,
@@ -84,46 +89,6 @@ class _CourseContentScreenState extends State<CourseContentScreen>
       index,
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
-    );
-  }
-
-  _buildCourseHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'Теория 1. Основы опдбора цветов',
-              style: context.text.appDescription.copyWith(fontSize: 15.0),
-            ),
-            paddingVerticalMedium,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.timelapse_outlined,
-                  color: AppColors.lightGrey,
-                ),
-                paddingHorizontalSmall,
-                Text(
-                  'Открыто 24.02.2023' '\nБессрочно',
-                  style: context.text.appDescription.copyWith(
-                    fontSize: 10.0,
-                    color: AppColors.lightGrey,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.more_vert),
-        ),
-      ],
     );
   }
 }
