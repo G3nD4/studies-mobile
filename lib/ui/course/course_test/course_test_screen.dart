@@ -1,9 +1,11 @@
+import 'package:coursor_tiktok/ui/course/course_test/widgets/test_widget.dart';
 import 'package:coursor_tiktok/ui/course/widgets/course_content_header.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/enums/content_type_enum.dart';
 import '../../common/default_divider.dart';
+import 'widgets/test_controls.dart';
 
 class CourseTestScreen extends StatelessWidget {
   const CourseTestScreen({super.key});
@@ -29,6 +31,9 @@ class CourseTestScreen extends StatelessWidget {
           ),
           DefaultDivider(),
           paddingVerticalMedium,
+          TestWidget(),
+          paddingVerticalMedium,
+          TestControls(),
         ],
       ),
     );

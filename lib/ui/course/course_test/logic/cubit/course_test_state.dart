@@ -6,6 +6,7 @@ sealed class CourseTestState {}
 final class CourseTestInitial extends CourseTestState {}
 
 final class CourseTestLoaded extends CourseTestState {
-  
+  final TestQuestion question;
 
+  CourseTestLoaded(this.question);
 }

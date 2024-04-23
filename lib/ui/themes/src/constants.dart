@@ -43,8 +43,8 @@ abstract class AppColors {
 abstract class AppGradients {
   static const containerBackgroundGradient = LinearGradient(
     colors: [
-      AppColors.purple,
-      AppColors.pink,
+      Color.fromARGB(255, 167, 62, 227),
+      Color.fromARGB(255, 219, 100, 251),
     ],
     stops: [0.24, 1],
     begin: Alignment.topCenter,
