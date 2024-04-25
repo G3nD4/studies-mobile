@@ -7,7 +7,7 @@ import '../../../domain/models/user_model.dart';
 // access token expired -> update it using refresh, user sees nothing
 // refresh token expired -> update it by logging in, user has to log in again
 
-const address = 'localhost:8000';
+const address = '10.0.2.2:8000';
 
 class API {
   static final Dio _api = Dio();
@@ -65,7 +65,7 @@ class API {
         accessToken = response.data['access_token'];
         log('Access token has been refreshed!');
         refreshToken = response.data['refresh_token'];
-        await _storage.write(key: 'access_token', value: accessToken);
+        await _storage.write(key: 'access_token', value: accessToken);  
         await _storage.write(key: 'refresh_token', value: refreshToken);
       } else {
         // refresh token is invalid
@@ -110,6 +110,7 @@ class API {
             key: 'access_token', value: response.data['access_token']);
         await _storage.write(
             key: 'refresh_token', value: response.data['refresh_token']);
+        log('Successful registered.');
         log((await _storage.read(key: 'access_token')) as String);
         log((await _storage.read(key: 'refresh_token')) as String);
         return true;
