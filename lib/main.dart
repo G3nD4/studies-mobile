@@ -1,15 +1,20 @@
 import 'package:coursor_tiktok/auth/authorization_controller.dart';
 import 'package:coursor_tiktok/routing/route_generator.dart';
+import 'package:coursor_tiktok/test_data.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
 import 'package:coursor_tiktok/ui/profile/admin/admin_profile.dart';
 import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
+import 'data/services/auth/api.dart';
 import 'ui/main_video/video_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await API().register(testRegisterModerator);
+
   runApp(const MyApp());
 }
 

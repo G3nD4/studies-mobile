@@ -1,3 +1,5 @@
+import 'package:coursor_tiktok/domain/models/correct_answer.dart';
+
 import '../enums/test_answer_type_enum.dart';
 
 class TestQuestion {
@@ -6,7 +8,7 @@ class TestQuestion {
   final String questionText;
   final TestAnswerType answerType;
   final List<String> answers;
-  final List<int> correctAnswerIndices;
+  final CorrectAnswer correctAnswerIndices;
 
   TestQuestion({
     required this.id,

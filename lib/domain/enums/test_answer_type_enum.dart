@@ -1,5 +1,5 @@
 enum TestAnswerType {
-  multiChouseAnswer,
+  multipleChouseAnswer,
   singleChouseAnswer,
   textAnswer,
 }

@@ -5,7 +5,7 @@ import '../domain/models/course_model.dart';
 import '../main.dart';
 import '../ui/course/course_content/course_content_screen.dart';
 import '../ui/course/course_screen.dart';
-import '../ui/course/course_test/course_test_screen.dart';
+import '../ui/course/course_test/screens/course_test_screen.dart';
 import '../ui/course/redact_course/redact_course_screen.dart';
 import '../ui/course/redact_course/widgets/course_management_screen.dart';
 import '../ui/main_video/video_screen.dart';
