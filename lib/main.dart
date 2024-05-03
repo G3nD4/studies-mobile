@@ -2,11 +2,13 @@ import 'package:coursor_tiktok/auth/authorization_controller.dart';
 import 'package:coursor_tiktok/domain/enums/user_type.dart';
 import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:coursor_tiktok/test_data.dart';
+import 'package:coursor_tiktok/ui/common/video_uploader.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
 import 'package:coursor_tiktok/ui/profile/admin/admin_profile.dart';
 import 'package:coursor_tiktok/ui/search/search_screen.dart';
 import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'data/services/auth/api.dart';
 import 'permissions/storage_permissions.dart';
@@ -94,36 +96,30 @@ class _CoursorTikTokState extends State<CoursorTikTok>
         indicatorPadding: const EdgeInsets.only(bottom: 4.0),
         controller: _tabController,
         onTap: onTabTapped,
-        tabs: const <Tab>[
-          Tab(
+        tabs: <Tab>[
+          const Tab(
             icon: Icon(
               Icons.search_sharp,
               color: AppColors.grey,
               size: 32.0,
             ),
           ),
-          Tab(
+          const Tab(
             icon: Icon(
               Icons.notifications_none,
               color: AppColors.grey,
               size: 32.0,
             ),
           ),
-          Tab(
-            icon: Icon(
-              Icons.play_circle,
-              color: AppColors.purple,
-              size: 40.0,
-            ),
-          ),
-          Tab(
+          mainTab(_selectedIndex),
+          const Tab(
             icon: Icon(
               Icons.person_2_outlined,
               color: AppColors.grey,
               size: 32.0,
             ),
           ),
-          Tab(
+          const Tab(
             icon: Icon(
               Icons.settings_outlined,
               color: AppColors.grey,
@@ -135,12 +131,26 @@ class _CoursorTikTokState extends State<CoursorTikTok>
     );
   }
 
+  Tab mainTab(int index) {
+    return Tab(
+      icon: Icon(
+        index == 2 ? CupertinoIcons.add : Icons.play_circle,
+        color: AppColors.purple,
+        size: 40.0,
+      ),
+    );
+  }
+
   void onTabTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _tabController.animateTo(index);
-      _pageController.jumpToPage(index);
-    });
+    if (index == _selectedIndex && index == 2) {
+      VideoUploader(context, communityId: 0).upload();
+    } else {
+      setState(() {
+        _selectedIndex = index;
+        _tabController.animateTo(index);
+        _pageController.jumpToPage(index);
+      });
+    }
   }
 
   void _onPageChanged(int index) {

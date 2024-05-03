@@ -21,8 +21,10 @@ class RedactVideoScreen extends StatefulWidget {
 class _RedactVideoScreenState extends State<RedactVideoScreen> {
   String get saveButtonText =>
       widget.type == EditType.edit ? 'Сохранить' : 'Опубликовать';
-  
-  String get appBarTitle => widget.type == EditType.edit ? 'Новое видео (предпросмотр)' : 'Редактирование видео';
+
+  String get appBarTitle => widget.type == EditType.edit
+      ? 'Новое видео (предпросмотр)'
+      : 'Редактирование видео';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class _RedactVideoScreenState extends State<RedactVideoScreen> {
                     widget.editMediaData.title = value;
                   },
                   decoration: const InputDecoration(
-                      hintText: 'Введите название видео...'),
+                    hintText: 'Введите название видео...',
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  ),
                 ),
               ),
               AppInputDecorations.underline(
@@ -61,8 +65,10 @@ class _RedactVideoScreenState extends State<RedactVideoScreen> {
                   onChanged: (value) {
                     widget.editMediaData.description = value;
                   },
-                  decoration:
-                      const InputDecoration(hintText: 'Добавьте подпись...'),
+                  decoration: const InputDecoration(
+                    hintText: 'Добавьте подпись...',
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  ),
                 ),
               ),
             ],
@@ -74,14 +80,24 @@ class _RedactVideoScreenState extends State<RedactVideoScreen> {
               AppButtons.defaultButton(
                 onPressed: () {},
                 color: AppColors.lightGrey,
-                child: const Text('Сохранить черновик'),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Сохранить черновик'),
+                ),
               ),
               AppButtons.defaultButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
                 color: AppColors.purple,
-                child: Text(saveButtonText),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    saveButtonText,
+                    style: context.text.labelStyle
+                        .copyWith(color: AppColors.white),
+                  ),
+                ),
               )
             ],
           ),
