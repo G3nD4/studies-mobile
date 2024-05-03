@@ -21,7 +21,7 @@ class RegisterUser {
       'password_hash': password,
       'username': userName,
       'phone_number': phoneNumber,
-      // 'userType': userType.name,
+      'user_type': userType.name,
     };
   }
 }

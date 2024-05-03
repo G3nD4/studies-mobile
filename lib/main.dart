@@ -1,4 +1,5 @@
 import 'package:coursor_tiktok/auth/authorization_controller.dart';
+import 'package:coursor_tiktok/domain/enums/user_type.dart';
 import 'package:coursor_tiktok/routing/route_generator.dart';
 import 'package:coursor_tiktok/test_data.dart';
 import 'package:coursor_tiktok/ui/notifications/notifications_screen.dart';
@@ -8,12 +9,18 @@ import 'package:coursor_tiktok/ui/settings/settings_screen.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'data/services/auth/api.dart';
+import 'permissions/storage_permissions.dart';
+import 'ui/common/video_picker_widget.dart';
 import 'ui/main_video/video_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await API().register(testRegisterModerator);
+  // Ask for storage permission
+  // await storagePermission();
+
+  // // await API().register(testRegisterModerator);
+  // await API().uploadVideo(UserType.moderators);
 
   runApp(const MyApp());
 }
@@ -48,7 +55,8 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   final screens = [
     const SearchScreen(),
     const NotificationsScreen(),
-    const VideoScreen(),
+    // const VideoScreen(),
+    VideoPickerWidget(),
     const AdminProfileScreen(),
     const SettingsScreen(),
   ];

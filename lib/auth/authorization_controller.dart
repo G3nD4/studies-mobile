@@ -20,6 +20,7 @@ class _AuthorizationControllerState extends State<AuthorizationController> {
       create: (context) => authCubit,
       child: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
+          return const CoursorTikTok();
           if (state is AuthorizedState) {
             return const CoursorTikTok();
           } else {

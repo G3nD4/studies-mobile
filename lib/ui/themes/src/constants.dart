@@ -125,7 +125,7 @@ abstract class AppButtons {
 
   static defaultButton({
     required Widget child,
-    required void Function() onPressed,
+    required void Function()? onPressed,
     Color? color,
   }) => MaterialButton(
     elevation: 0.0,

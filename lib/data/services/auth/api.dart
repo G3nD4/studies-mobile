@@ -1,13 +1,21 @@
 import 'dart:developer';
+import 'package:coursor_tiktok/domain/enums/user_type.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import "package:http_parser/http_parser.dart";
+import 'package:mime/mime.dart';
 
+import '../../../domain/models/auth_user.dart';
 import '../../../domain/models/user_model.dart';
 
 // access token expired -> update it using refresh, user sees nothing
 // refresh token expired -> update it by logging in, user has to log in again
 
-const address = '10.0.2.2:8000';
+// const address = 'http://10.0.2.2:8000';
+const address = 'http://158.160.165.200:5000';
+// const address = 'http://127.0.0.1:8000';
+
+const testToken = 'Rz6L2QEMRUQzTUTtIFr1ARitkXNrZKIP-5bdAk3Nd2A';
 
 class API {
   static final Dio _api = Dio();
@@ -26,10 +34,11 @@ class API {
           accessToken ??= await _storage.read(key: 'accessToken');
 
           if (!options.path.contains('http')) {
-            options.path =
-                'https://$address/${options.path}'; // TODO: rename path
+            options.path = '$address/${options.path}'; // TODO: rename path
           }
-          options.headers['Authorization'] = 'Bearer $accessToken';
+          log('Request: ${options.method}\n${options.path}\n${options.data}',
+              level: 3);
+          // options.headers['Authorization'] = 'Bearer $accessToken';
           return handler.next(options);
         },
         onError: (DioException error, handler) async {
@@ -65,7 +74,7 @@ class API {
         accessToken = response.data['access_token'];
         log('Access token has been refreshed!');
         refreshToken = response.data['refresh_token'];
-        await _storage.write(key: 'access_token', value: accessToken);  
+        await _storage.write(key: 'access_token', value: accessToken);
         await _storage.write(key: 'refresh_token', value: refreshToken);
       } else {
         // refresh token is invalid
@@ -124,31 +133,81 @@ class API {
     }
   }
 
-  // Future<bool> login(AuthUser authUser) async {
-  //   try {
-  //     final Response response = await _api.post(
-  //       '/login/token',
-  //       options: Options(
-  //         contentType: Headers.formUrlEncodedContentType,
-  //       ),
-  //       data: authUser.toJson(),
-  //     );
-  //     if (response.statusCode == 200) {
-  //       await _storage.write(
-  //           key: 'access_token', value: response.data['access_token']);
-  //       await _storage.write(
-  //           key: 'refresh_token', value: response.data['refresh_token']);
-  //       log((await _storage.read(key: 'access_token')) as String);
-  //       log((await _storage.read(key: 'refresh_token')) as String);
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     log('Error during logging in!', name: 'API login');
-  //     return false;
-  //   }
-  // }
+  Future<bool> login(AuthUser authUser) async {
+    try {
+      final Response response = await _api.post(
+        // TODO: тут нельзя получить UserType
+        'auth/moderators/login/',
+        data: authUser.toJson(),
+      );
+      if (response.statusCode == 200) {
+        await _storage.write(
+            key: 'access_token', value: response.data['token']);
+        // await _storage.write(
+        //     key: 'refresh_token', value: response.data['refresh_token']);
+        // TODO: раскомментить
+        log((await _storage.read(key: 'access_token')) as String);
+        // log((await _storage.read(key: 'refresh_token')) as String);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      log('Error during logging in!', name: 'API login');
+      return false;
+    }
+  }
+
+  // TODO: запихать в сервис аля "videos" ----------------------------------------------------------------
+  Future<bool> uploadVideo(UserType userType) async {
+    try {
+      final formData = FormData.fromMap({
+        'file': await _imageOrNull(),
+      });
+      await _api.post(
+        'video/${userType.name}/upload',
+        data: formData,
+        queryParameters: {
+          'video_title': 'test_video_title_in_request_data',
+          'video_description': 'video_desc',
+          'author_id': 1,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'token': accessToken,
+          },
+        ),
+      );
+      return true;
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return false;
+  }
+
+  Future<MultipartFile?> _imageOrNull() async {
+    // if (image == null) {
+    //   return null;
+    // }
+
+    // PlatformFile(
+    //   path: image.path,
+    //   name: image.name,
+    //   size: await image.length(),
+    // );
+
+    return await MultipartFile.fromFile(
+      '/storage/emulated/0/test_video.mp4', // TODO: это тестовый видос, переделать
+      contentType: MediaType.parse(
+          lookupMimeType('/storage/emulated/0/test_video.mp4') ?? 'video/mp4'),
+    );
+  }
+
+  // TODO:------------------------------------------------------------------------------------------------
+
+
 
   // Future<void> getSelf() async {
   //   final Response response = await _api.get('/users/me');

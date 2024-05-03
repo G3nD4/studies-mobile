@@ -50,6 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
               controller: _loginController,
+              style: context.text.labelStyle.copyWith(color: AppColors.white),
+              onChanged: (value) {
+                BlocProvider.of<AuthCubit>(context).user.email = value;
+              },
               decoration: AppInputDecorations.defaultInputDecoration(
                 fillColor: AppColors.white.withOpacity(0.2),
                 hintStyle:
@@ -64,6 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextFormField(
               obscureText: true,
               controller: _passwordController,
+              style: context.text.labelStyle.copyWith(color: AppColors.white),
+              onChanged: (value) {
+                BlocProvider.of<AuthCubit>(context).user.password = value;
+              },
               decoration: AppInputDecorations.defaultInputDecoration(
                 fillColor: AppColors.white.withOpacity(0.2),
                 hintStyle:

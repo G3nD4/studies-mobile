@@ -3,6 +3,7 @@ import 'package:coursor_tiktok/ui/main_video/widgets/controls/main_controls.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../common/video_picker_widget.dart';
 import 'widgets/video_player_widget.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -31,16 +32,6 @@ class VideoScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // GestureDetector(
-              //   onVerticalDragEnd: (details) {},
-              //   child: Container(
-              //     color: AppColors.black,
-              //     child: const Center(
-              //         child: CircularProgressIndicator(
-              //       color: AppColors.purple,
-              //     )),
-              //   ),
-              // ),
             ),
             const Align(
               alignment: Alignment.centerRight,
