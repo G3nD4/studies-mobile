@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:coursor_tiktok/domain/enums/edit_screen_open_type.dart';
 import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import '../../../domain/models/media_data.dart';
 
 class RedactVideoScreen extends StatefulWidget {
@@ -19,6 +22,24 @@ class RedactVideoScreen extends StatefulWidget {
 }
 
 class _RedactVideoScreenState extends State<RedactVideoScreen> {
+  late final VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    assert(widget.editMediaData.file != null, 'File must not be null');
+    _controller = VideoPlayerController.file(
+      File(widget.editMediaData.file!.path),
+    );
+    _controller.addListener(_videoPlayerListener);
+  }
+
+  _videoPlayerListener() {
+    if (_controller.value.isCompleted) {
+      _controller.play();
+    }
+  }
+
   String get saveButtonText =>
       widget.type == EditType.edit ? 'Сохранить' : 'Опубликовать';
 
@@ -45,8 +66,20 @@ class _RedactVideoScreenState extends State<RedactVideoScreen> {
                 width: MediaQuery.of(context).size.width * 0.25,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
-                  child:
-                      const Placeholder(), // TODO: сделать виджет видеоплеера и запихать сюда
+                  child: FutureBuilder(
+                    future: _controller.initialize(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        // TODO: сделать виджет видеоплеера и запихать сюда
+                        _controller.play();
+                        return VideoPlayer(_controller);
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    }),
+                  ),
                 ),
               ),
               AppInputDecorations.underline(

@@ -18,4 +18,6 @@ class EditMediaData {
   String? title;
   String? description;
   XFile? file;
+
+  EditMediaData({this.title, this.description, this.file});
 }

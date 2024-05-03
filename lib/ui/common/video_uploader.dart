@@ -20,7 +20,7 @@ class VideoUploader {
     if (file == null) {
       return;
     }
-    EditMediaData editMediaData = await _getMediaData(file);
+    EditMediaData editMediaData = await _getMediaData();
     // TODO: upload video to server
     log('title: ${editMediaData.title}, description: ${editMediaData.description}');
     Future.delayed(const Duration(seconds: 2)).then((_) {
@@ -37,8 +37,8 @@ class VideoUploader {
     );
   }
 
-  Future<EditMediaData> _getMediaData(XFile? file) async {
-    EditMediaData editMediaData = EditMediaData();
+  Future<EditMediaData> _getMediaData() async {
+    EditMediaData editMediaData = EditMediaData(file: file);
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => RedactVideoScreen(
