@@ -104,6 +104,19 @@ abstract class AppInputDecorations {
         hintStyle: hintStyle,
         prefixIcon: prefixIcon,
       );
+  
+  static underline({required TextFormField textFormField}) => Container(
+    decoration: const BoxDecoration(
+      color: Colors.transparent,
+      border: Border(
+        bottom: BorderSide(
+          color: AppColors.veryLightGrey,
+          width: 1.0,
+        ),
+      ),
+    ),
+    child: textFormField,
+  );
 }
 
 abstract class AppButtons {

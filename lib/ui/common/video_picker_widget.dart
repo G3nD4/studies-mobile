@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
+import 'video_uploader.dart';
+
 class VideoPickerWidget extends StatefulWidget {
   const VideoPickerWidget({super.key});
 
@@ -14,7 +16,7 @@ class VideoPickerWidget extends StatefulWidget {
 class _VideoPickerWidgetState extends State<VideoPickerWidget> {
   File? galleryFile;
   late final ImagePicker picker;
-  late VideoPlayerController? _controller;
+  VideoPlayerController? _controller;
 
   @override
   void initState() {
@@ -24,6 +26,8 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
 
   @override
   void dispose() {
+    _controller?.pause();
+    _controller?.removeListener(_playerListener);
     _controller?.dispose();
     super.dispose();
   }
@@ -33,6 +37,7 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               child: ElevatedButton(
@@ -40,8 +45,9 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
                   backgroundColor: MaterialStateProperty.all(Colors.green),
                 ),
                 child: const Text('Выбрать видео из галереи'),
-                onPressed: () {
-                  _showPicker(context: context);
+                onPressed: () async {
+                  await VideoUploader(context, communityId: 0).upload();
+                  // _showPicker(context: context);
                 },
               ),
             ),
@@ -100,7 +106,7 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
     final XFile? xfilePick = pickedFile;
     if (xfilePick != null) {
       galleryFile = File(pickedFile!.path);
-      await initController();
+      await _initController();
       setState(() {});
     } else {
       if (context.mounted) {
@@ -113,8 +119,18 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
     }
   }
 
-  initController() async {
+  _initController() async {
     _controller = VideoPlayerController.file(galleryFile!);
     await _controller!.initialize();
+    _controller!.addListener(_playerListener);
+    _controller!.play();
+  }
+
+  void _playerListener() {
+    if (!_controller!.value.isInitialized) return;
+
+    if (_controller!.value.position == _controller!.value.duration) {
+      _controller!.play();
+    }
   }
 }

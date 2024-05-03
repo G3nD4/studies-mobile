@@ -55,8 +55,7 @@ class _CoursorTikTokState extends State<CoursorTikTok>
   final screens = [
     const SearchScreen(),
     const NotificationsScreen(),
-    // const VideoScreen(),
-    VideoPickerWidget(),
+    const VideoScreen(),
     const AdminProfileScreen(),
     const SettingsScreen(),
   ];

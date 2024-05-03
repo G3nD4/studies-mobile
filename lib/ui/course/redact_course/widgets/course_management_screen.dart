@@ -2,6 +2,8 @@ import 'package:coursor_tiktok/ui/common/default_appbar.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/video_uploader.dart';
+
 class CourseManagementScreen extends StatelessWidget {
   const CourseManagementScreen({super.key});
 
@@ -31,7 +33,9 @@ class CourseManagementScreen extends StatelessWidget {
               context,
               buttonHeight,
               'Создать ролик >>',
-              () {},
+              () {
+                VideoUploader(context, communityId: 0).upload();
+              },
             ),
             paddingVerticalMedium,
             _buildButton(
@@ -53,12 +57,12 @@ class CourseManagementScreen extends StatelessWidget {
     void Function() onPressed,
   ) =>
       AppButtons.defaultOutlineButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: SizedBox(
           height: buttonHeight,
           child: Center(
             child: Text(
-              'Создать теорию >>',
+              text,
               style: context.text.appDescription.copyWith(
                 fontSize: 15.0,
               ),
