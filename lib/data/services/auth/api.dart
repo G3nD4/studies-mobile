@@ -1,21 +1,22 @@
 import 'dart:developer';
-import 'package:coursor_tiktok/domain/enums/user_type.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import "package:http_parser/http_parser.dart";
 import 'package:mime/mime.dart';
 
 import '../../../domain/models/auth_user.dart';
+import '../../../domain/models/media_data.dart';
 import '../../../domain/models/user_model.dart';
 
 // access token expired -> update it using refresh, user sees nothing
 // refresh token expired -> update it by logging in, user has to log in again
 
 // const address = 'http://10.0.2.2:8000';
-const address = 'http://158.160.165.200:5000';
+const address = 'http://158.160.130.73:5000';
 // const address = 'http://127.0.0.1:8000';
 
-const testToken = 'Rz6L2QEMRUQzTUTtIFr1ARitkXNrZKIP-5bdAk3Nd2A';
+// default token to send requests
+const testToken = '5X2b4ndum01Qb6EX_65hehp8-JyXUlk8oxIFStRqDBc';
 
 class API {
   static final Dio _api = Dio();
@@ -159,23 +160,32 @@ class API {
   }
 
   // TODO: запихать в сервис аля "videos" ----------------------------------------------------------------
-  Future<bool> uploadVideo(UserType userType) async {
+  Future<bool> uploadVideo(EditMediaData mediaData) async {
+    assert(mediaData.file != null, 'File must not be null!');
     try {
       final formData = FormData.fromMap({
-        'file': await _imageOrNull(),
+        'file': await MultipartFile.fromFile(
+          mediaData.file!.path, // TODO: это тестовый видос, переделать
+          contentType: MediaType.parse(
+            lookupMimeType(mediaData.file!.path) ?? 'video/mp4',
+          ),
+        ),
       });
-      await _api.post(
-        'video/${userType.name}/upload',
-        data: formData,
-        queryParameters: {
-          'video_title': 'test_video_title_in_request_data',
-          'video_description': 'video_desc',
+
+      final query = {
+          'title': mediaData.title ?? '',
+          'description': mediaData.description ?? '',
           'author_id': 1,
-        },
+        };
+
+      await _api.post(
+        'videos/',
+        data: formData,
+        queryParameters: query,
         options: Options(
           headers: {
             'Content-Type': 'multipart/form-data',
-            'token': accessToken,
+            'token': testToken,
           },
         ),
       );
@@ -187,27 +197,7 @@ class API {
     return false;
   }
 
-  Future<MultipartFile?> _imageOrNull() async {
-    // if (image == null) {
-    //   return null;
-    // }
-
-    // PlatformFile(
-    //   path: image.path,
-    //   name: image.name,
-    //   size: await image.length(),
-    // );
-
-    return await MultipartFile.fromFile(
-      '/storage/emulated/0/test_video.mp4', // TODO: это тестовый видос, переделать
-      contentType: MediaType.parse(
-          lookupMimeType('/storage/emulated/0/test_video.mp4') ?? 'video/mp4'),
-    );
-  }
-
   // TODO:------------------------------------------------------------------------------------------------
-
-
 
   // Future<void> getSelf() async {
   //   final Response response = await _api.get('/users/me');

@@ -74,7 +74,7 @@ class _RedactVideoScreenState extends State<RedactVideoScreen> {
                         _controller.play();
                         return VideoPlayer(_controller);
                       } else {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }

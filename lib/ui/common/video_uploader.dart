@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:coursor_tiktok/domain/models/media_data.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/services/auth/api.dart';
 import '../redact_media/redact_video/redact_video_screen.dart';
 
 class VideoUploader {
@@ -23,9 +23,16 @@ class VideoUploader {
     EditMediaData editMediaData = await _getMediaData();
     // TODO: upload video to server
     log('title: ${editMediaData.title}, description: ${editMediaData.description}');
-    Future.delayed(const Duration(seconds: 2)).then((_) {
-      _showSuccessDialog();
-    });
+    // Показываем индикатор загрузки.
+    _showLoadingIndicator();
+    // Загружаем видео.
+    API().uploadVideo(editMediaData).then(
+      (value) {
+        // После того, как загрузили, показываем сообщение об успешной загрузке.
+        Navigator.pop(context);
+        _showSuccessDialog();
+      },
+    );
   }
 
   Future<void> _showSuccessDialog() async {
@@ -33,6 +40,21 @@ class VideoUploader {
       context: context,
       builder: (context) => const AlertDialog(
         title: Text('Видео опубликовано!'),
+      ),
+    );
+  }
+
+  Future<void> _showLoadingIndicator() async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: Column(
+          children: [
+            CircularProgressIndicator(),
+            Text('Загрузка...'),
+          ],
+        ),
       ),
     );
   }
