@@ -56,15 +56,8 @@ class VideoUploader {
             const CircularProgressIndicator(),
             DefaultTextStyle(
               style: context.text.appDescription,
-              child: Text('Загрузка...'),
+              child: const Text('Загрузка...'),
             )
-            // Material(
-            //   child:
-            //   Text(
-            //     'Загрузка...',
-            //     style: context.text.appDescription,
-            //   ),
-            // ),
           ],
         ),
       ),
