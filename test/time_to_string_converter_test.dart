@@ -1,4 +1,4 @@
-import 'package:coursor_tiktok/data/time_to_string_converter.dart';
+import 'package:coursor_tiktok/ui/utils/time_to_string_converter.dart';
 import 'package:coursor_tiktok/domain/enums/time_convert_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 

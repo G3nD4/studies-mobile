@@ -34,18 +34,37 @@ class CommentsDialog {
           SliverChildListDelegate([
         CommentBubble(
           comment: Comment(
+            id: 3,
             authorName: 'Михаил Зимин',
             commentText: 'Не грузятся видео !!!',
             time: DateTime.now().subtract(const Duration(hours: 3)),
           ),
+          answers: const [],
         ),
         paddingVerticalMedium,
         CommentBubble(
           comment: Comment(
-            authorName: 'Михаил Зимин',
-            commentText: 'Не грузятся видео !!!',
+            id: 0,
+            authorName: 'Лев Никитин',
+            commentText: 'Крутое видео !!!',
             time: DateTime.now().subtract(const Duration(minutes: 30)),
           ),
+          answers: [
+            Answer(
+              id: 1,
+              authorName: 'Михаил Зимин',
+              commentText: 'Оно не грузится!!!',
+              time: DateTime.now().subtract(const Duration(minutes: 20)),
+              initialCommentAuthorName: 'Лев Никитин'
+            ),
+            Answer(
+              id: 2,
+              authorName: 'Антон Никитин',
+              commentText: 'КОММЕНТАРИЙ !!!',
+              time: DateTime.now().subtract(const Duration(minutes: 13)),
+              initialCommentAuthorName: 'Михаил Зимин'
+            ),
+          ],
         ),
       ]),
     );
