@@ -11,9 +11,7 @@ import '../../../domain/models/user_model.dart';
 // access token expired -> update it using refresh, user sees nothing
 // refresh token expired -> update it by logging in, user has to log in again
 
-// const address = 'http://10.0.2.2:8000';
 const address = 'http://158.160.130.73:5000';
-// const address = 'http://127.0.0.1:8000';
 
 // default token to send requests
 const testToken = '5X2b4ndum01Qb6EX_65hehp8-JyXUlk8oxIFStRqDBc';
@@ -197,9 +195,5 @@ class API {
     return false;
   }
 
-  // TODO:------------------------------------------------------------------------------------------------
-
-  // Future<void> getSelf() async {
-  //   final Response response = await _api.get('/users/me');
-  // }
+  
 }
