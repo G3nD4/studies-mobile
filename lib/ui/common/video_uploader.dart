@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:coursor_tiktok/domain/models/media_data.dart';
+import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,11 +49,22 @@ class VideoUploader {
     await showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const Center(
+      builder: (context) => Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            Text('Загрузка...'),
+            const CircularProgressIndicator(),
+            DefaultTextStyle(
+              style: context.text.appDescription,
+              child: Text('Загрузка...'),
+            )
+            // Material(
+            //   child:
+            //   Text(
+            //     'Загрузка...',
+            //     style: context.text.appDescription,
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -72,21 +84,38 @@ class VideoUploader {
   }
 
   Future<void> _pickFile(BuildContext context) async {
-    await showModalBottomSheet(
+    await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return SafeArea(
-          child: Wrap(
+        return AlertDialog(
+          surfaceTintColor: AppColors.white,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Галерея'),
-                onTap: () async {
+              Text(
+                'Выберите видео на устройстве',
+                style: context.text.appDescription,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.veryLightGrey,
+                  elevation: 0.0,
+                  textStyle:
+                      context.text.appDescription.copyWith(fontSize: 10.0),
+                ),
+                onPressed: () async {
                   await _getVideo(context);
                   if (context.mounted) {
                     Navigator.of(context).pop();
                   }
                 },
+                child: Text(
+                  'Загрузить',
+                  style: context.text.appDescription.copyWith(
+                    fontSize: 10.0,
+                    color: AppColors.black,
+                  ),
+                ),
               ),
             ],
           ),
