@@ -106,7 +106,7 @@ class API {
     );
   }
 
-  Future<bool> register(RegisterUser registerUser) async {
+  Future<bool> register(User registerUser) async {
     try {
       final Response response = await _api.post(
         '${registerUser.userType.name}/',
@@ -155,6 +155,10 @@ class API {
       log('Error during logging in!', name: 'API login');
       return false;
     }
+  }
+
+  Future<bool> updateProfile(User user) async {
+    return true;
   }
 
   // TODO: запихать в сервис аля "videos" ----------------------------------------------------------------

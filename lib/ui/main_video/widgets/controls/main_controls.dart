@@ -1,3 +1,4 @@
+import 'package:coursor_tiktok/ui/main_video/widgets/comments_dialog.dart';
 import 'package:coursor_tiktok/ui/themes/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,11 @@ class MainVideoControls extends StatelessWidget {
         ),
         paddingVerticalMedium,
         IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            CommentsDialog(context).show();
+          },
           icon: const Icon(
-            CupertinoIcons.chat_bubble,//bubble_right,
+            CupertinoIcons.chat_bubble, //bubble_right,
             size: 36.0,
             color: AppColors.grey,
           ),

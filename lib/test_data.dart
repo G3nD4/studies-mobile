@@ -81,7 +81,7 @@ Test testTest = Test(
 );
 
 
-final testRegisterStudet = RegisterUser(
+final testRegisterStudet = User(
   email: 'test@test',
   password: '123123123',
   userName: 'test',
@@ -89,7 +89,7 @@ final testRegisterStudet = RegisterUser(
   userType: UserType.students,
 );
 
-final testRegisterTeacher = RegisterUser(
+final testRegisterTeacher = User(
   email: 'test@test',
   password: '123123123',
   userName: 'test',
@@ -97,7 +97,7 @@ final testRegisterTeacher = RegisterUser(
   userType: UserType.teachers,
 );
 
-final testRegisterModerator = RegisterUser(
+final testRegisterModerator = User(
   email: 'test@test',
   password: '123123123',
   userName: 'test',

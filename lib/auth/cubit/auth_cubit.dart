@@ -11,7 +11,7 @@ import '../../domain/models/auth_user.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final RegisterUser user = RegisterUser(
+  final User user = User(
     email: '',
     password: '',
     userName: '',

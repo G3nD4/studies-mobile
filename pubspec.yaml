@@ -32,6 +32,7 @@ dependencies:
   device_info_plus: ^10.1.0
   permission_handler: ^11.3.1
   video_player: ^2.8.6
+  bottom_sheet: ^4.0.4
 
 dev_dependencies:
   flutter_test:

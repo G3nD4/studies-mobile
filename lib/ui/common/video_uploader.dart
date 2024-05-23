@@ -22,7 +22,6 @@ class VideoUploader {
       return;
     }
     EditMediaData editMediaData = await _getMediaData();
-    // TODO: upload video to server
     log('title: ${editMediaData.title}, description: ${editMediaData.description}');
     // Показываем индикатор загрузки.
     _showLoadingIndicator();

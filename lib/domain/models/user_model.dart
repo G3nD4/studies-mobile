@@ -1,13 +1,13 @@
 import 'package:coursor_tiktok/domain/enums/user_type.dart';
 
-class RegisterUser {
+class User {
   String email;
   String password;
   String userName;
   String phoneNumber;
   UserType userType;
 
-  RegisterUser({
+  User({
     required this.email,
     required this.password,
     required this.userName,
