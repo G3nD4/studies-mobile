@@ -3,6 +3,10 @@ import 'package:coursor_tiktok/domain/enums/time_convert_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testForComments();
+}
+
+void testForComments() {
   group('Convert time for comments', () {
     test('Seconds ago', () {
       // arrange
