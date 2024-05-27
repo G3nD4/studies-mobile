@@ -88,6 +88,12 @@ class VideoUploader {
                 'Выберите видео на устройстве',
                 style: context.text.appDescription,
               ),
+              paddingVerticalLarge,
+              Text(
+                'Рекомендуем загружать видео в портретном режиме.',
+                style: context.text.appDescription.copyWith(fontSize: 15.0),
+              ),
+              paddingVerticalMedium,
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.veryLightGrey,
@@ -102,7 +108,7 @@ class VideoUploader {
                   }
                 },
                 child: Text(
-                  'Загрузить',
+                  'Выбрать из галлереи',
                   style: context.text.appDescription.copyWith(
                     fontSize: 10.0,
                     color: AppColors.black,
