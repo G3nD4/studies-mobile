@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'dart:developer';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import "package:http_parser/http_parser.dart";
+import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 
 import '../../../domain/models/auth_user.dart';
@@ -175,10 +180,10 @@ class API {
       });
 
       final query = {
-          'title': mediaData.title ?? '',
-          'description': mediaData.description ?? '',
-          'author_id': 1,
-        };
+        'title': mediaData.title ?? '',
+        'description': mediaData.description ?? '',
+        'author_id': 1,
+      };
 
       await _api.post(
         'videos/',
@@ -199,5 +204,52 @@ class API {
     return false;
   }
 
-  
+  // Future<XFile?> getVideo(int id) async {
+  //   try {
+  //     Response response = await _api.get(
+  //       'videos/$id',
+  //       queryParameters: {'user_id': 1},
+  //       options: Options(
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //           'token': testToken,
+  //         },
+  //       ),
+  //     );
+
+  //     List<int> encoded = utf8.encode(response.data as String);
+  //     Uint8List uint8List = Uint8List.fromList(encoded);
+
+  //     return XFile.fromData(uint8List);
+  //   } catch (e) {
+  //     log(e.toString());
+  //     return null;
+  //   }
+  // }
+
+Future<XFile?> getVideo(int id) async {
+  try {
+    Response response = await _api.get(
+      'videos/$id',
+      queryParameters: {'user_id': 1},
+      options: Options(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'token': testToken,
+        },
+        responseType: ResponseType.bytes, // Ensure response is received as bytes
+      ),
+    );
+
+    // Assuming the response data is actually a Byte array directly
+    Uint8List uint8List = Uint8List.fromList(response.data);
+
+    // Set a meaningful name and MIME type for the XFile
+    return XFile.fromData(uint8List, name: 'video_$id.mp4', mimeType: 'video/mp4');
+  } catch (e) {
+    log(e.toString());
+    return null;
+  }
+}
+
 }

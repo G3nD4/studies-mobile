@@ -12,24 +12,33 @@ class VideoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => MainVideoPlayerCubit(),
+        create: (context) => MainVideoPlayerCubit()..loadNext(),
         child: Stack(
           children: [
             Positioned.fill(
-              // TODO: Сделать разноцветные прогресс индикаторы
-              child: PageView(
-                scrollDirection: Axis.vertical,
-                children: const [
-                  VideoPlayerWidget(
-                    color: Colors.green,
-                  ),
-                  VideoPlayerWidget(
-                    color: Colors.red,
-                  ),
-                  VideoPlayerWidget(
-                    color: Colors.white,
-                  ),
-                ],
+              child: BlocBuilder<MainVideoPlayerCubit, MainVideoPlayerState>(
+                builder: (context, state) {
+                  if (state is MainVideoPlayerLoaded) {
+                    return PageView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        VideoPlayerWidget(
+                          color: Colors.green,
+                          fileBytes: state.file,
+                        ),
+                        VideoPlayerWidget(
+                          color: Colors.red,
+                          fileBytes: state.file,
+                        ),
+                        VideoPlayerWidget(
+                          color: Colors.white,
+                          fileBytes: state.file,
+                        ),
+                      ],
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
               ),
             ),
             const Align(
